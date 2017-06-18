@@ -1,0 +1,8 @@
+{
+	"name" : "Dragon HUD",
+	"description" : "Dragovorn's Custom HUD",
+	"author" : "Dragovorn",
+	"contact" : "me@dragovorn.com",
+	"version" : "0.0.1",
+	"priority" : 0
+}
