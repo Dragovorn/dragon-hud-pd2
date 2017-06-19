@@ -1,8 +1,10 @@
+-- This is broken and needs fixing!
+
 local init_original = HUDTeammate.init
 local set_name_original = HUDTeammate.set_name
 local set_state_original = HUDTeammate.set_state
 
-function HUDTeammate(i, ...)
+function HUDTeammate:init(i, ...)
 	init_original(self, i, ...)
 	self:_init_killcount()
 end
@@ -127,7 +129,7 @@ end
 function HUDTeammate:_update_kill_count_pos()
 	self._kills_text:set_right(self._kills_panel:w() - 4)
 	local _, _, w, _ = self._kills_text:text_rect()
-	self._kill_icon:set_right(self._kills_panel:w() - w - 4 - self._kill_icon:w() * 0.15
+	self._kill_icon:set_right(self._kills_panel:w() - w - 4 - self._kill_icon:w() * 0.15)
 	self._kills_text_bg:set_right(self._kills_panel:w())
 	self._kills_text_bg:set_w(w + 8)
 end
