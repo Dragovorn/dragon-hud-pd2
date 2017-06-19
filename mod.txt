@@ -19,8 +19,12 @@
 			"script_path" : "hud/MenuManager.lua"
 		},
 		{
-			"hook_id" : "lib/managers/menu/menucomponentmanager"
+			"hook_id" : "lib/managers/menu/menucomponentmanager",
 			"script_path" : "hud/MenuComponentManager.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hud/hudteammate",
+			"script_path" : "hud/HUDTeammate.lua"
 		}
 	]
 }
