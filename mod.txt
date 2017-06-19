@@ -3,7 +3,7 @@
 	"description" : "Dragovorn's Custom HUD",
 	"author" : "Dragovorn",
 	"contact" : "me@dragovorn.com",
-	"version" : "0.0.1",
+	"version" : "0.0.2 - BETA",
 	"priority" : 0,
 	"hooks" : [
 		{
@@ -16,11 +16,23 @@
 		},
 		{
 			"hook_id" : "lib/managers/menumanager",
-			"script_path" : "hud/MenuManager.lua"
+			"script_path" : "hud/MenuCallbackHandler.lua"
 		},
 		{
 			"hook_id" : "lib/managers/menu/menucomponentmanager",
 			"script_path" : "hud/MenuComponentManager.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hud/hudteammate",
+			"script_path" : "hud/HUDTeammate.lua"
+		},
+		{
+			"hook_id" : "lib/managers/hudmanagerpd2",
+			"script_path" : "hud/HUDManager.lua"
+		},
+		{
+			"hook_id" : "lib/units/enemies/cop/copdamage",
+			"script_path" : "hud/CopDamage.lua"
 		}
 	]
 }
