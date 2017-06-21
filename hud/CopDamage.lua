@@ -47,10 +47,81 @@ function CopDamage:damage_bullet(data, ...)
 	return result
 end
 
-function CopDamage:sync_damage_bullet(unit, damage, body, offset_hight, variant, death, ...)
+function CopDamage:damage_explosion(data, ...)
+	if not self:dead() then
+		explosion_original(self, data, ...)
+		
+		if self:dead() and alive(data.attacker_unit) then
+			self:_process_kill(data.attacker_unit, data.col_ray and data.col_ray.body and self._unit:get_body_index(data.col_ray.body:name()))
+		end
+	end
+end
+
+function CopDamage:damage_melee(data, ...)
+	local result = original_damage_melee(self, data, ...)
+	
+	if result and result.type == "death" then
+		self:_process_kill(data.attacker_unit, self._unit:get_body_index(data.col_ray.body:name()))
+	end
+	
+	return result
+end
+
+function CopDamage:damage_fire(data, ...)
+	-- TODO: This is a hack, waiting for OVERKILL to learn to code
+	if not self:dead() then
+		original_damage_fire(self, data, ...)
+		
+		if self:dead() and alive(data.attacker_unit) then
+			self:_process_kill(data.attacker_unit, data.col_ray and data.col_ray.body and self._unit:get_body_index(data.col_ray.body:name()))
+		end
+	end
+	
+	--local result = original_damage_melee(self, data, ...)
+	
+	--if result and result.type == "death" then
+	--	self:_process_kill(data.attacker_unit, self._unit:get_body_index(data.col_ray.body:name()))
+	--end
+	
+	--return result
+end
+
+function CopDamage:sync_damage_bullet(unit, damage, body, offset_height, variant, death, ...)
 	if death then
 		self._process_kill(unit, body)
 	end
 	
-	return original_sync_damage_bullet(self, unit, damage, body, offset_hight, variant, death, ...)
+	return original_sync_damage_bullet(self, unit, damage, body, offset_height, variant, death, ...)
+end
+
+function CopDamage:sync_damage_explosion(unit, damage, variant, death, direction, weapon, ...)
+	if death then
+		self:_process_kill(unit)
+	end
+	
+	return original_sync_damage_explosion(self, unit, damage, death, direction, weapon, ...)
+end
+
+function CopDamage:sync_damage_melee(unit, damage, percent, body, offset_height, variant, death, ...)
+	if death then
+		self:_process_kill(unit, body)
+	end
+	
+	return original_sync_damage_melee(self, unit, damage, percent, body, offset_height, variant, death, ...)
+end
+
+function CopDamage:sync_damage_fire(unit, percent, dance, death, direction, weapon_type, weapon_id, healed, ...)
+	if death then
+		self:_process_kill(unit)
+	end
+	
+	return original_sync_damage_fire(self, unit, percent, dance, death, direction, weapon_type, weapon_id, healed, ...)
+end
+
+function CopDamage:sync_damage_dot(unit, damage, death, variant, hurt, weapon_id, ...)
+	if death then
+		self:_process_kill(unit)
+	end
+	
+	return original_sync_damage_dot(self, unit, damage, death, variant, hurt, weapon_id, ...)
 end
