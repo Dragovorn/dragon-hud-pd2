@@ -86,13 +86,13 @@ function CopDamage:damage_fire(data, ...)
 	--return result
 end
 
-function CopDamage:sync_damage_bullet(unit, damage, body, offset_height, variant, death, ...)
-	if death then
-		self._process_kill(unit, body)
-	end
+--function CopDamage:sync_damage_bullet(unit, damage, body, offset_height, variant, death, ...)
+--	if death then
+--		self._process_kill(unit, body)
+--	end
 	
-	return original_sync_damage_bullet(self, unit, damage, body, offset_height, variant, death, ...)
-end
+--	return original_sync_damage_bullet(self, unit, damage, body, offset_height, variant, death, ...)
+--end
 
 function CopDamage:sync_damage_explosion(unit, damage, variant, death, direction, weapon, ...)
 	if death then
