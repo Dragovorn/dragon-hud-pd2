@@ -3,7 +3,7 @@
 	"description" : "Dragovorn's Custom HUD",
 	"author" : "Dragovorn",
 	"contact" : "me@dragovorn.com",
-	"version" : "0.0.2 - BETA_4",
+	"version" : "0.0.3 - BETA_1",
 	"priority" : 0,
 	"hooks" : [
 		{
@@ -33,6 +33,10 @@
 		{
 			"hook_id" : "lib/units/enemies/cop/copdamage",
 			"script_path" : "hud/CopDamage.lua"
+		},
+		{
+			"hook_id" : "lib/managers/localizationmanager"
+			"script_path" : "hud/LocalizationManager.lua"
 		}
 	]
 }
