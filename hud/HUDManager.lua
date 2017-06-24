@@ -19,5 +19,5 @@ end
 -- Move this to a seperate file with a seperate trigger in BLT as it probably can be done w/ a seperate trigger.
 function HUDManager.set_blackscreen_mid_text(_ARG_0_, _ARG_1_, ...)
 	managers.hud._hud_blackscreen._blackscreen_panel:child("mid_text"):set_center_y(managers.hud._hud_blackscreen._blackscreen_panel:child("mid_text"):y() - 50)
-    managers.hud._hud_blackscreen:set_mid_text("DragonHUD v" .. DragonHUD:GetVersion() .. " Initialized")
+    managers.hud._hud_blackscreen:set_mid_text("DragonHUD v" .. DragonHUD:GetVersion() .. " Initialized!")
 end
