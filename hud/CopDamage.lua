@@ -49,7 +49,7 @@ end
 
 function CopDamage:damage_explosion(data, ...)
 	if not self:dead() then
-		explosion_original(self, data, ...)
+		original_damage_explosion(self, data, ...)
 		
 		if self:dead() and alive(data.attacker_unit) then
 			self:_process_kill(data.attacker_unit, data.col_ray and data.col_ray.body and self._unit:get_body_index(data.col_ray.body:name()))

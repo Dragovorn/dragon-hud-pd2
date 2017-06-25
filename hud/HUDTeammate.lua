@@ -8,10 +8,10 @@ function HUDTeammate:init(i, ...)
 end
 
 function HUDTeammate:set_name(teammate_name, ...)
-	--if teammate_name ~= self._name then
-	--	self._name = teammate_name
-	--	self:reset_kill_count()
-	--end
+	if teammate_name ~= self._name then
+		self._name = teammate_name
+		self:reset_kill_count()
+	end
 	
 	local name_panel = self._panel:child("name")
 	name_panel:set_text(teammate_name)

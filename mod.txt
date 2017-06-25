@@ -3,7 +3,7 @@
 	"description" : "Dragovorn's Custom HUD",
 	"author" : "Dragovorn",
 	"contact" : "me@dragovorn.com",
-	"version" : "0.0.3 - BETA_3",
+	"version" : "0.0.3 - BETA_4",
 	"priority" : 0,
 	"hooks" : [
 		{
