@@ -68,7 +68,6 @@ function CopDamage:damage_melee(data, ...)
 end
 
 function CopDamage:damage_fire(data, ...)
-	-- TODO: This is a hack, waiting for OVERKILL to learn to code
 	if not self:dead() then
 		original_damage_fire(self, data, ...)
 		
@@ -76,14 +75,6 @@ function CopDamage:damage_fire(data, ...)
 			self:_process_kill(data.attacker_unit, data.col_ray and data.col_ray.body and self._unit:get_body_index(data.col_ray.body:name()))
 		end
 	end
-	
-	--local result = original_damage_melee(self, data, ...)
-	
-	--if result and result.type == "death" then
-	--	self:_process_kill(data.attacker_unit, self._unit:get_body_index(data.col_ray.body:name()))
-	--end
-	
-	--return result
 end
 
 function CopDamage:sync_damage_bullet(unit, damage, body, offset_height, variant, death, ...)
