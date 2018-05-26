@@ -7,15 +7,17 @@
 	"priority" : -1,
 	"updates" : [
 		{
-			"revision" : 1,
+			"revision" : 2,
 			"identifier" : "dragonhud"
 		}
 	],
-	"hooks" : [
+	"pre_hooks" : [
 		{
-			"hook_id" : "lib/setups/setup",
-			"script_path" : "hud/DragonHUD.lua"
-		},
+			"hook_id" : "core/lib/utils/coreapp",
+			"script_path" : "DragonHUD.lua"
+		}
+	],
+	"hooks" : [
 		{
 			"hook_id" : "lib/managers/menu/menunodegui",
 			"script_path" : "hud/MainMenu.lua"
