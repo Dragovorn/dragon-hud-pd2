@@ -4,10 +4,11 @@
 	"author" : "Dragovorn",
 	"contact" : "me@dragovorn.com",
 	"version" : "0.0.1",
+	"blt_version" : 2,
 	"priority" : -1,
 	"updates" : [
 		{
-			"revision" : 2,
+			"revision" : 3,
 			"identifier" : "dragonhud"
 		}
 	],
