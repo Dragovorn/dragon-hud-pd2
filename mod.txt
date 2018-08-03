@@ -1,14 +1,15 @@
 {
 	"name" : "DragonHUD",
-	"description" : "Dragovorn's HUD",
+	"description" : "Dragovorn's Custom HUD",
 	"author" : "Dragovorn",
 	"contact" : "me@dragovorn.com",
-	"version" : "0.0.1",
+	"version" : "0.0.2-SNAPSHOT",
 	"blt_version" : 2,
+	"undisablable" : true,
 	"priority" : -1,
 	"updates" : [
 		{
-			"revision" : 3,
+			"revision" : 6,
 			"identifier" : "dragonhud"
 		}
 	],
@@ -50,6 +51,28 @@
 		{
 			"hook_id" : "lib/managers/hud/hudblackscreen",
 			"script_path" : "hud/HUDBlackScreen.lua"
+		},
+		{
+			"hook_id" : "lib/network/handlers/unitnetworkhandler",
+			"script_path" : "hud/UnitNetworkHandler.lua"
+		},
+		{
+			"hook_id" : "lib/network/base/networkpeer",
+			"script_path" : "hud/NetworkPeer.lua"
+		},
+		{
+			"hook_id" : "lib/managers/dlcmanager",
+			"script_path" : "hud/DLCManager.lua"
+		},
+		{
+			"hook_id" : "lib/managers/menumanager",
+			"script_path" : "hud/MenuManager.lua"
+		}
+	],
+	"persist_scripts" : [
+		{
+			"global" : "DLC_UNLOCKER",
+			"script_path" : "hud/DLCManager.lua"
 		}
 	]
 }

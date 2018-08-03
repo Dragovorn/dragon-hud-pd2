@@ -1,10 +1,12 @@
 local init_original = HUDTeammate.init
 local set_name_original = HUDTeammate.set_name
 local set_state_original = HUDTeammate.set_state
+local set_health_original = HUDTeammate.set_health
 
 function HUDTeammate:init(i, ...)
 	init_original(self, i, ...)
 	self:_init_killcount()
+	self:_init_revivecount()
 end
 
 function HUDTeammate:set_name(teammate_name, ...)
@@ -46,6 +48,83 @@ function HUDTeammate:_truncate_name()
 	name_bg_panel:set_w(w + 4)
 	name_bg_panel:set_h(h + 2)
 	name_bg_panel:set_y(name_panel:y() + name_panel:h() / 2 - h / 2 - 1)
+end
+
+function HUDTeammate:_init_revivecount()
+	-- log("Init revives")
+
+	self._revives_counter = self._player_panel:child("radial_health_panel"):text({
+		name = "revives_counter",
+		alpha = 1,
+		visible = not managers.groupai:state():whisper_mode(),
+		text = "0",
+		layer = 1,
+		color = Color.white,
+		w = self._player_panel:child("radial_health_panel"):w(),
+		x = 0,
+		y = 0,
+		h = self._player_panel:child("radial_health_panel"):h(),
+		vertical = "center",
+		align = "center",
+		font_size = 14,
+		font = tweak_data.hud_players.ammo_font
+	})
+
+	self._revives_count = 0
+end
+
+function HUDTeammate:increment_revives()
+	if self._revives_counter and self._revives_count then
+		-- log("Increment Revives")
+		self._revives_count = self._revives_count + 1
+		self._revives_counter:set_text(tostring(self._revives_count))
+	end
+end
+
+function HUDTeammate:reset_revives()
+	if self._revives_counter and self._revives_count then
+		-- log("Reset revives")
+		self._revives_count = 0
+
+		if not self._main_player then
+			self._revives_counter:set_text(tostring(self._revives_count))
+		else
+			self._revives_counter:set_text(tostring(3 + managers.player:upgrade_value("player", "additional_lives", 0)) .. (managers.player:has_category_upgrade("player", "pistol_revive_from_bleed_out") and ("/" .. managers.player:upgrade_value("player", "pistol_revive_from_bleed_out", 0)) or "0"))
+		end
+	end
+end
+
+function HUDTeammate:set_revive_visibility(visible)
+	if self._revives_counter then
+		-- log("Change revives visibility")
+		self._revives_counter:set_visible(not managers.groupai:state():whisper_mode() and visible and not self._is_in_custody)
+	end
+end
+
+function HUDTeammate:set_player_in_custody(custody)
+	-- log("Change custody")
+	self._is_in_custody = custody
+	self:set_revive_visibility(not custody)
+end
+
+function HUDTeammate:set_health(data)
+	if data.revives then
+		-- log("set health")
+		local revive_colors = { Color("FF8000"), Color("FFFF00"), Color("80FF00"), Color("00FF00") }
+		self._revives_counter:set_color(revive_colors[data.revives - 1] or Color.red)
+
+		if self._main_player and managers.player:has_category_upgrade("player", "messiah_revive_from_bleed_out") then
+			-- log("set main player revives")
+			self._revives_counter:set_text(tostring(data.revives - 1) .. "/" .. tostring(managers.player._messiah_charges or 0))
+		else
+			-- log("set other player revives")
+			self._revives_counter:set_text(tostring(data.revives - 1))
+		end
+
+		self:set_player_in_custody(data.revives - 1 < 0)
+	end
+
+	return set_health_original(self, data)
 end
 
 function HUDTeammate:_init_killcount()
